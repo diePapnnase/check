@@ -1,0 +1,75 @@
+#include <Windows.h>
+#include <string>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+struct clientbase
+{
+	int number;           // номер телефона
+	int code;            // кода услуги
+	char date;          // дата использования
+	char time;         // время использования
+	char usetime;     // продолжительсность использования
+};
+
+void Read_txt(vector<clientbase>& MAS, int & n)
+{
+	fstream fin = fstream("tretie.txt", ios::in); 
+	if (fin.good())
+	{
+		fin >> n;
+		MAS.resize(n);
+		for (int i = 0; i < n; i++)
+		{
+			fin >> MAS[i].number;
+			fin >> MAS[i].code;
+			fin >> MAS[i].date;
+			fin >> MAS[i].time;
+			fin >> MAS[i].usetime;
+		}
+	}
+}
+
+void Write_use(vector<clientbase> MAS, int i)
+{
+	cout << "Использование услуги: " << i + 1 << endl;
+	cout << "Номер телефона: " << MAS[i].number << endl;
+	cout << "Код услуги: " << MAS[i].code << endl;
+	cout << "Дата использования: " << MAS[i].date << endl;
+	cout << "Время использования: " << MAS[i].time << endl;
+	cout << "Продолжительсность использования: " << MAS[i].usetime << endl;
+}
+
+void Write_console(vector<clientbase> MAS, int n)
+{
+	if (!MAS.empty())
+	{
+		cout << "Использовано услуг: " << n << endl;
+		for (int i = 0; i < n; i++)
+		{
+			Write_use(MAS, i);
+			cout << endl;
+		}
+	}
+	else
+		cout << "Список пуст!" << endl;
+}
+
+int main()
+{
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	setlocale(LC_ALL, "ru");
+
+	vector<clientbase> tretie;
+	int n = 0;
+	Read_txt(tretie, n);
+	cout << "Список был загружен!" << endl;
+	cout << endl;
+	Write_console(tretie, n);
+	
+}
