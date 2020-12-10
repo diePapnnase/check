@@ -30,7 +30,7 @@ void fillWithFileData(vector<ServiceUsageRecord> records)
 
 void Write_txt(vector<ServiceUsageRecord>& MAS, int& n)
 {
-	fstream fout = fstream("students.txt", ios::out);
+	fstream fout = fstream("test.txt", ios::out);
 	if (fout.good())
 	{
 	
